@@ -18,12 +18,12 @@ fun HomeScreen(navController: NavController, modifier: Modifier = Modifier, onLi
         Button(onClick = {
             navController.navigate(NavScreen.Add.route)
         }, modifier = Modifier.fillMaxWidth()) {
-            Text(text = "Tambah")
+            Text(text = "Tambah Item")
         }
         Button(onClick = {
             onLihat()
         }, modifier = Modifier.fillMaxWidth()) {
-            Text(text = "Lihat")
+            Text(text = "Cek Item")
         }
     }
 }

@@ -47,7 +47,7 @@ fun MainScreen(onExitClick: () -> Unit) {
     Scaffold(
         topBar = {
                  TopAppBar(
-                     title = { Text(text = "Agenda") },
+                     title = { Text(text = "PelanBako") },
                      navigationIcon = {
                          if (currentRoute.value != NavScreen.Login.route) {
                              Image(
@@ -88,7 +88,7 @@ fun MainScreen(onExitClick: () -> Unit) {
                         verticalAlignment = Alignment.CenterVertically) {
                         Image(
                             painterResource(id = R.drawable.baseline_add_24),
-                            contentDescription = "Tambah",
+                            contentDescription = "Tambah Item",
                             colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onPrimary),
                             modifier = Modifier
                                 .clickable {
@@ -98,7 +98,7 @@ fun MainScreen(onExitClick: () -> Unit) {
                         )
                         Image(
                             painterResource(id = R.drawable.baseline_remove_red_eye_24),
-                            contentDescription = "Lihat",
+                            contentDescription = "Cek Item",
                             colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onPrimary),
                             modifier = Modifier
                                 .clickable {
@@ -150,7 +150,7 @@ fun MainScreen(onExitClick: () -> Unit) {
             }
             composable(NavScreen.Add.route) {
                 currentRoute.value = NavScreen.Add.route
-                FormTodoScreen(modifier = Modifier.padding(innerPadding))
+                FormItemScreen(modifier = Modifier.padding(innerPadding))
             }
             composable(NavScreen.Edit.routeWithArgument,
                 arguments = listOf(navArgument(NavScreen.Edit.argument0) { type = NavType.StringType }))
@@ -158,7 +158,7 @@ fun MainScreen(onExitClick: () -> Unit) {
                 val id = backStackEntry.arguments?.getString(NavScreen.Edit.argument0) ?: return@composable
 
                 currentRoute.value = NavScreen.Edit.route
-                FormTodoScreen(modifier = Modifier.padding(innerPadding), id = id)
+                FormItemScreen(modifier = Modifier.padding(innerPadding), id = id)
             }
         }
     }

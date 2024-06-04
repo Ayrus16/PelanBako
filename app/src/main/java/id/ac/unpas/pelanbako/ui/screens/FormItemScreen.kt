@@ -1,11 +1,16 @@
 package id.ac.unpas.pelanbako.ui.screens
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Snackbar
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -13,7 +18,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -21,10 +28,13 @@ import com.benasher44.uuid.uuid4
 import kotlinx.coroutines.launch
 
 @Composable
-fun FormTodoScreen(modifier: Modifier = Modifier, id : String? = null) {
+fun FormItemScreen(modifier: Modifier = Modifier, id : String? = null) {
 
     val viewModel = hiltViewModel<ItemViewModel>()
     val scope = rememberCoroutineScope()
+
+    val showError = remember { mutableStateOf(false) }
+
 
     val name = remember { mutableStateOf(TextFieldValue("")) }
     val description = remember { mutableStateOf(TextFieldValue("")) }
@@ -54,23 +64,36 @@ fun FormTodoScreen(modifier: Modifier = Modifier, id : String? = null) {
             OutlinedTextField(
                 label = { Text(text = "Price") },
                 modifier = Modifier.fillMaxWidth(),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 value = price.value, onValueChange = {
                     price.value = it
                 })
             OutlinedTextField(
                 label = { Text(text = "Stock") },
                 modifier = Modifier.fillMaxWidth(),
-                value = stock.value, onValueChange = {
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                    value = stock.value, onValueChange = {
                     stock.value = it
-                })
+                }
+
+            )
 
 
             Row {
                 Button(modifier = Modifier.weight(5f), onClick = {
                     if (id != null) {
-                        scope.launch {
-                            viewModel.update(id, name.value.text, description.value.text, price.value.text.toInt(), stock.value.text.toInt())
+                        val priceInt = price.value.text.toIntOrNull()
+                        val stockInt = stock.value.text.toIntOrNull()
+                        if (priceInt != null || stockInt != null) {
+                            scope.launch {
+                                viewModel.update(id, name.value.text, description.value.text, price.value.text.toInt(), stock.value.text.toInt())
+                            }
+                        } else {
+                            showError.value = true
                         }
+//                        scope.launch {
+//                            viewModel.update(id, name.value.text, description.value.text, price.value.text.toInt(), stock.value.text.toInt())
+//                        }
                     } else {
                         scope.launch {
                             viewModel.insert(uuid4().toString(), name.value.text, description.value.text,  price.value.text.toInt(), stock.value.text.toInt())
@@ -88,6 +111,15 @@ fun FormTodoScreen(modifier: Modifier = Modifier, id : String? = null) {
                 }) {
                     Text(text = "Batal")
                 }
+            }
+
+            if (showError.value) {
+                Snackbar(
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Text(text = "Invalid price format")
+                }
+                showError.value = false // Reset error state after showing the Snackbar
             }
         }
 
