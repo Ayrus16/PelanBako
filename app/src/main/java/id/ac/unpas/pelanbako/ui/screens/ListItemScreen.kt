@@ -18,7 +18,7 @@ import id.ac.unpas.pelanbako.ui.composables.ConfirmationDialog
 import kotlinx.coroutines.launch
 
 @Composable
-fun ListTodoScreen(modifier: Modifier = Modifier, onDelete: () -> Unit, onClick: (String) -> Unit) {
+fun ListItemScreen(modifier: Modifier = Modifier, onDelete: () -> Unit, onClick: (String) -> Unit) {
 
     val scope = rememberCoroutineScope()
     val viewModel = hiltViewModel<ItemViewModel>()
@@ -39,7 +39,7 @@ fun ListTodoScreen(modifier: Modifier = Modifier, onDelete: () -> Unit, onClick:
         LazyColumn(modifier = Modifier.fillMaxWidth()) {
             items(list.size) { index ->
                 val item = list[index]
-                TodoItem(item = item, onEditClick = { id ->
+                ItemItem(item = item, onEditClick = { id ->
                     onClick(id)
                 }, onDeleteClick = { id ->
                     deleting.value = true

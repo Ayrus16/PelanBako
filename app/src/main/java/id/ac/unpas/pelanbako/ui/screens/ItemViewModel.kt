@@ -8,11 +8,11 @@ import androidx.lifecycle.switchMap
 import dagger.hilt.android.lifecycle.HiltViewModel
 import id.ac.unpas.pelanbako.base.LiveCoroutinesViewModel
 import id.ac.unpas.pelanbako.models.item
-import id.ac.unpas.pelanbako.repositories.TodoRepository
+import id.ac.unpas.pelanbako.repositories.ItemRepository
 import javax.inject.Inject
 
 @HiltViewModel
-class ItemViewModel @Inject constructor(private val todoRepository: TodoRepository) : LiveCoroutinesViewModel() {
+class ItemViewModel @Inject constructor(private val itemRepository: ItemRepository) : LiveCoroutinesViewModel() {
 
     private val _isDone: MutableLiveData<Boolean> = MutableLiveData(false)
     val isDone: LiveData<Boolean> = _isDone
@@ -30,7 +30,7 @@ class ItemViewModel @Inject constructor(private val todoRepository: TodoReposito
     val todos : LiveData<List<item>> = _todo.switchMap {
         _isLoading.postValue(true)
         launchOnViewModelScope {
-            todoRepository.loadItems(
+            itemRepository.loadItems(
                 onSuccess = {
                     _isLoading.postValue(false)
                 },
@@ -50,7 +50,7 @@ class ItemViewModel @Inject constructor(private val todoRepository: TodoReposito
         stock: Int
     ) {
         _isLoading.postValue(true)
-        todoRepository.insert(item(id, name, description, price, stock),
+        itemRepository.insert(item(id, name, description, price, stock),
             onSuccess = {
                 _isLoading.postValue(false)
                 _isDone.postValue(true)
@@ -72,7 +72,7 @@ class ItemViewModel @Inject constructor(private val todoRepository: TodoReposito
         stock: Int
     ) {
         _isLoading.postValue(true)
-        todoRepository.update(item(id, name, description, price, stock),
+        itemRepository.update(item(id, name, description, price, stock),
             onSuccess = {
                 _isLoading.postValue(false)
                 _isDone.postValue(true)
@@ -88,7 +88,7 @@ class ItemViewModel @Inject constructor(private val todoRepository: TodoReposito
 
     suspend fun delete(id: String) {
         _isLoading.postValue(true)
-        todoRepository.delete(id,
+        itemRepository.delete(id,
             onSuccess = {
                 _isLoading.postValue(false)
                 _isDone.postValue(true)
@@ -105,7 +105,7 @@ class ItemViewModel @Inject constructor(private val todoRepository: TodoReposito
     }
 
     suspend fun find(id: String) {
-        val todo = todoRepository.find(id)
+        val todo = itemRepository.find(id)
         todo?.let {
             _item.postValue(it)
         }
