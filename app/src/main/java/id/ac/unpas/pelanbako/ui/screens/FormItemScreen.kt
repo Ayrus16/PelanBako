@@ -7,10 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Snackbar
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -18,7 +15,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
@@ -84,16 +80,9 @@ fun FormItemScreen(modifier: Modifier = Modifier, id : String? = null) {
                     if (id != null) {
                         val priceInt = price.value.text.toIntOrNull()
                         val stockInt = stock.value.text.toIntOrNull()
-                        if (priceInt != null || stockInt != null) {
-                            scope.launch {
-                                viewModel.update(id, name.value.text, description.value.text, price.value.text.toInt(), stock.value.text.toInt())
-                            }
-                        } else {
-                            showError.value = true
+                        scope.launch {
+                            viewModel.update(id, name.value.text, description.value.text, price.value.text.toInt(), stock.value.text.toInt())
                         }
-//                        scope.launch {
-//                            viewModel.update(id, name.value.text, description.value.text, price.value.text.toInt(), stock.value.text.toInt())
-//                        }
                     } else {
                         scope.launch {
                             viewModel.insert(uuid4().toString(), name.value.text, description.value.text,  price.value.text.toInt(), stock.value.text.toInt())
@@ -113,14 +102,6 @@ fun FormItemScreen(modifier: Modifier = Modifier, id : String? = null) {
                 }
             }
 
-            if (showError.value) {
-                Snackbar(
-                    modifier = Modifier.fillMaxWidth(),
-                ) {
-                    Text(text = "Invalid price format")
-                }
-                showError.value = false // Reset error state after showing the Snackbar
-            }
         }
 
 
