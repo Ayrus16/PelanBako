@@ -162,17 +162,17 @@ fun MainScreen(onExitClick: () -> Unit) {
                 FormItemScreen(modifier = Modifier.padding(innerPadding), id = id)
             }
 
-            composable(NavScreen.Order.route) {
-                currentRoute.value = NavScreen.Order.route
-                FormOrderScreen(modifier = Modifier.padding(innerPadding), onDelete = {
-                    scope.launch {
-                        snackBarHostState.showSnackbar("Data telah dihapus", "OK")
-                    }
-
-                }) { id ->
-                    navController.navigate("${NavScreen.Edit.route}/$id")
-                }
-            }
+//            composable(NavScreen.Order.route) {
+//                currentRoute.value = NavScreen.Order.route
+//                FormOrderScreen(modifier = Modifier.padding(innerPadding), onDelete = {
+//                    scope.launch {
+//                        snackBarHostState.showSnackbar("Data telah dihapus", "OK")
+//                    }
+//
+//                }) { id ->
+//                    navController.navigate("${NavScreen.Edit.route}/$id")
+//                }
+//            }
 
         }
     }

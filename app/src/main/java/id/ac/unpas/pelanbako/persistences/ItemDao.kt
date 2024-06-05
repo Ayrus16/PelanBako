@@ -6,7 +6,9 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import id.ac.unpas.pelanbako.models.item
+import id.ac.unpas.pelanbako.models.order_item
 
 @Dao
 interface ItemDao {
@@ -37,4 +39,16 @@ interface ItemDao {
 
     @Delete
     suspend fun delete(item: item)
+
+    @Update
+    suspend fun updateItem(item: item)
+
+    companion object {
+        @Update
+        fun updateItem(value: item) {
+
+        }
+    }
+
+
 }

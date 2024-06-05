@@ -20,4 +20,13 @@ interface order_itemDao {
 
     @Query("SELECT * FROM order_item WHERE order_id = :orderId")
     suspend fun getOrderItemsByOrderId(orderId: Int): List<order_item>
+
+    companion object {
+        @Delete
+        fun deleteOrderItem(orderItems: List<order_item>) {
+
+        }
+    }
+
+
 }
