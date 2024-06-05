@@ -11,8 +11,6 @@ data class order(
     @PrimaryKey
     val id: Int,
     @ColumnInfo(name = "date")
-    val date: DateTime,
+    val date: String,
     val totalPrice: Float,
-    @ColumnInfo(name = "created_at")
-    val createdAt: DateTime,
 )
