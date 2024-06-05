@@ -113,8 +113,16 @@ fun MainScreen(onExitClick: () -> Unit) {
         },
         floatingActionButton = {
             if (currentRoute.value == NavScreen.Home.route) {
-                FloatingActionButton(onClick = { navController.navigate(NavScreen.Add.route) }) {
-                    Image(painterResource(id = R.drawable.baseline_add_24), contentDescription = "Add")
+                FloatingActionButton(
+                    onClick = { navController.navigate(NavScreen.Add.route) },
+                    containerColor = MaterialTheme.colorScheme.primary
+                ) {
+                    Image(
+                        painterResource(id = R.drawable.baseline_add_24),
+                        contentDescription = "Add",
+                        colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onPrimary),
+                    )
+
                 }
             }
         },
