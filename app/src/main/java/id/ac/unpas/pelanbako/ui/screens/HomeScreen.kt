@@ -15,6 +15,8 @@ fun HomeScreen(navController: NavController, modifier: Modifier = Modifier, onLi
     Column(modifier = modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center) {
         Text(text = "Selamat Datang", modifier = Modifier.fillMaxWidth())
+        
+
         Button(onClick = {
             navController.navigate(NavScreen.Add.route)
         }, modifier = Modifier.fillMaxWidth()) {

@@ -139,7 +139,7 @@ fun MainScreen(onExitClick: () -> Unit) {
             }
             composable(NavScreen.List.route) {
                 currentRoute.value = NavScreen.List.route
-                ListTodoScreen(modifier = Modifier.padding(innerPadding), onDelete = {
+                ListItemScreen(modifier = Modifier.padding(innerPadding), onDelete = {
                     scope.launch {
                         snackBarHostState.showSnackbar("Data telah dihapus", "OK")
                     }
@@ -148,6 +148,7 @@ fun MainScreen(onExitClick: () -> Unit) {
                     navController.navigate("${NavScreen.Edit.route}/$id")
                 }
             }
+
             composable(NavScreen.Add.route) {
                 currentRoute.value = NavScreen.Add.route
                 FormItemScreen(modifier = Modifier.padding(innerPadding))
@@ -160,6 +161,19 @@ fun MainScreen(onExitClick: () -> Unit) {
                 currentRoute.value = NavScreen.Edit.route
                 FormItemScreen(modifier = Modifier.padding(innerPadding), id = id)
             }
+
+            composable(NavScreen.Order.route) {
+                currentRoute.value = NavScreen.Order.route
+                FormOrderScreen(modifier = Modifier.padding(innerPadding), onDelete = {
+                    scope.launch {
+                        snackBarHostState.showSnackbar("Data telah dihapus", "OK")
+                    }
+
+                }) { id ->
+                    navController.navigate("${NavScreen.Edit.route}/$id")
+                }
+            }
+
         }
     }
 }

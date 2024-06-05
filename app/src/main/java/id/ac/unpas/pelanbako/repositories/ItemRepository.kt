@@ -12,7 +12,7 @@ import id.ac.unpas.pelanbako.persistences.ItemDao
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class TodoRepository @Inject constructor(private val api: ItemApi, private val dao: ItemDao) {
+class ItemRepository @Inject constructor(private val api: ItemApi, private val dao: ItemDao) {
 
     @WorkerThread
     fun loadItems(onSuccess: () -> Unit,
