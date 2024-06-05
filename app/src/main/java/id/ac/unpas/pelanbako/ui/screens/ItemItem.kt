@@ -11,7 +11,7 @@ import id.ac.unpas.pelanbako.R
 import id.ac.unpas.pelanbako.models.item
 
 @Composable
-fun TodoItem(item: item, onEditClick: (String) -> Unit, onDeleteClick: (String) -> Unit) {
+fun ItemItem(item: item, onEditClick: (String) -> Unit, onDeleteClick: (String) -> Unit) {
     Row {
         Text(modifier = Modifier.weight(3f), text = item.name)
         Text(modifier = Modifier.weight(3f), text = item.description)

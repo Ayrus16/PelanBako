@@ -9,4 +9,5 @@ sealed class NavScreen(val route: String) {
     }
     object List : NavScreen("list")
     object Login : NavScreen("login")
+    object Order : NavScreen("order")
 }
