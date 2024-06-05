@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -50,7 +51,7 @@ fun LoginScreen(modifier: Modifier = Modifier, onLoginClick: () -> Unit) {
                 })
 
             Row {
-                Button(modifier = Modifier.weight(5f), onClick = {
+                Button(modifier = Modifier.weight(5f).padding(10.dp), onClick = {
                     if (username.value == "admin" && password.value == "admin") {
                         onLoginClick()
                     } else {
@@ -61,7 +62,7 @@ fun LoginScreen(modifier: Modifier = Modifier, onLoginClick: () -> Unit) {
                     Text(text = "Login")
                 }
 
-                Button(modifier = Modifier.weight(5f), onClick = {
+                OutlinedButton(modifier = Modifier.weight(5f).padding(10.dp), onClick = {
 
                 }) {
                     Text(text = "Batal")

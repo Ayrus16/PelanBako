@@ -87,12 +87,12 @@ fun MainScreen(onExitClick: () -> Unit) {
                         horizontalArrangement = Arrangement.Center,
                         verticalAlignment = Alignment.CenterVertically) {
                         Image(
-                            painterResource(id = R.drawable.baseline_add_24),
-                            contentDescription = "Tambah Item",
+                            painterResource(id = R.drawable.baseline_shopping_cart_24),
+                            contentDescription = "Order",
                             colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onPrimary),
                             modifier = Modifier
                                 .clickable {
-                                    navController.navigate(NavScreen.Add.route)
+                                    navController.navigate(NavScreen.Order.route)
                                 }
                                 .weight(0.5f)
                         )
