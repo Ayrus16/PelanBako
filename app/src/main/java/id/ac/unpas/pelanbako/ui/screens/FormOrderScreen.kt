@@ -25,11 +25,11 @@ import id.ac.unpas.pelanbako.models.*
 @Composable
 fun OrderDialog(
     order: order,
-    orderItems: List<orderItem>,
+    orderItems: List<order_item>,
     items: List<item>,
     onConfirm: () -> Unit,
     onAddItem: () -> Unit,
-    onEditItem: (orderItem) -> Unit,
+    onEditItem: (order_item) -> Unit,
     onDismiss: () -> Unit
 ) {
     var showItemDialog by remember { mutableStateOf(false) }

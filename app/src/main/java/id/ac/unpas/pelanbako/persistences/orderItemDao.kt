@@ -8,18 +8,18 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import id.ac.unpas.pelanbako.models.item
-import id.ac.unpas.pelanbako.models.orderItem
+import id.ac.unpas.pelanbako.models.order_item
 
 interface orderItemDao {
     @Insert
-    suspend fun insertOrderItem(orderItem: orderItem)
+    suspend fun insertOrderItem(orderItem: order_item)
 
     @Update
-    suspend fun updateOrderItem(orderItem: orderItem)
+    suspend fun updateOrderItem(orderItem: order_item)
 
     @Delete
-    suspend fun deleteOrderItem(orderItem: orderItem)
+    suspend fun deleteOrderItem(orderItem: order_item)
 
     @Query("SELECT * FROM order_item WHERE order_id = :orderId")
-    suspend fun getOrderItemsByOrderId(orderId: Int): List<orderItem>
+    suspend fun getOrderItemsByOrderId(orderId: Int): List<order_item>
 }
